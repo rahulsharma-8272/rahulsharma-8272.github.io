@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAF8;
+      --surface: #FFFFFF;
+      --border: #E4E0D8;
+      --accent: #1B3557;
+      --accent-soft: #EBF0F6;
+      --text-primary: #1A1A1A;
+      --text-secondary: #6B6670;
+      --text-muted: #9B97A0;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Outfit', system-ui, sans-serif;
+      --nav-h: 60px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-primary);
+      background: var(--bg);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HERO ── */
+    #about {
+      padding: 6rem 0 4rem;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .profile-card {
+      position: sticky;
+      top: calc(var(--nav-h) + 2rem);
+    }
+
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #D6E4F0 0%, #C4D8EB 100%);
+      border: 3px solid var(--border);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .avatar-initials {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--accent);
+    }
+
+    .profile-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+    }
+    .profile-title {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 0.15rem;
+    }
+    .profile-location {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 1.25rem;
+    }
+    .profile-location svg { flex-shrink: 0; }
+
+    .profile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .profile-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .profile-link:hover { color: var(--accent); }
+    .profile-link svg { flex-shrink: 0; opacity: 0.6; }
+
+    .cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 1.25rem;
+      padding: 8px 18px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: opacity 0.2s;
+    }
+    .cv-btn:hover { opacity: 0.85; }
+
+    /* ── CONTENT COLUMN ── */
+    .content-col { min-width: 0; }
+
+    .greeting {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+    .greeting em { font-style: italic; color: var(--accent); }
+
+    .bio p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      font-size: 15px;
+    }
+    .bio a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+    .bio a:hover { border-color: var(--accent); }
+
+    /* ── SECTION ── */
+    section { padding: 4rem 0; border-top: 1px solid var(--border); }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 500;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── TIMELINE ── */
+    .timeline { display: flex; flex-direction: column; gap: 2rem; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1.5rem;
+    }
+
+    .timeline-date {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      padding-top: 3px;
+      text-align: right;
+    }
+
+    .timeline-body { position: relative; }
+    .timeline-body::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem;
+      top: 7px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 1.5px solid var(--text-muted);
+    }
+
+    .timeline-role {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    .timeline-org {
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .timeline-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ── NEWS ── */
+    .news-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .news-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-date {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      padding-top: 2px;
+    }
+    .news-text { font-size: 14px; color: var(--text-secondary); }
+    .news-text strong { color: var(--text-primary); font-weight: 500; }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .pub-item {
+      padding: 1.25rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      border-left: 3px solid var(--accent);
+    }
+    .pub-title {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .pub-authors {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 0.2rem;
+    }
+    .pub-venue {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .pub-badge {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 2px 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 20px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+    .skill-group {}
+    .skill-group-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      padding: 4px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    /* ── CONTACT ── */
+    #contact { border-top: 1px solid var(--border); padding: 4rem 0 5rem; }
+    .contact-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .contact-inner h2 {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .contact-inner p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .contact-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+      background: var(--surface);
+    }
+    .contact-link-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    footer p { font-size: 12px; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      #about { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0 2rem; }
+      .profile-card { position: static; display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .timeline-date { text-align: left; }
+      .timeline-body::before { display: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a class="nav-logo" href="#about">Your Name</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO / ABOUT ── -->
+<div class="page-wrap">
+  <section id="about" style="border-top: none; padding-top: 5rem;">
+
+    <!-- Left: Profile Card -->
+    <div class="profile-card">
+      <div class="avatar">
+        <!-- Swap src with your photo path, or remove <img> to keep initials -->
+        <!-- <img src="profile.jpg" alt="Your Name" /> -->
+        <span class="avatar-initials">YN</span>
+      </div>
+
+      <div class="profile-name">Your Name</div>
+      <div class="profile-title">Software Engineer · Research Scientist</div>
+      <div class="profile-location">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        San Francisco, CA
+      </div>
+
+      <div class="profile-links">
+        <a class="profile-link" href="mailto:you@email.com">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          you@email.com
+        </a>
+        <a class="profile-link" href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 0 1 4 0v4m0-4v4"/></svg>
+          LinkedIn
+        </a>
+        <a class="profile-link" href="https://github.com/yourusername" target="_blank" rel="noopener">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a class="profile-link" href="https://scholar.google.com" target="_blank" rel="noopener">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+          Google Scholar
+        </a>
+      </div>
+
+      <a class="cv-btn" href="cv.pdf" target="_blank">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 17V3M12 17l-4-4M12 17l4-4"/><path d="M20 21H4"/></svg>
+        Download CV
+      </a>
+    </div>
+
+    <!-- Right: Bio -->
+    <div class="content-col">
+      <h1 class="greeting">Hello, I'm <em>Your Name</em> —<br/>a researcher & engineer<br/>building intelligent systems.</h1>
+
+      <div class="bio">
+        <p>
+          I am a software engineer and researcher at <a href="#">Company Name</a>, working at the intersection of machine learning and [your field]. My work focuses on [your research focus — e.g., "building scalable systems for human-AI collaboration"].
+        </p>
+        <p>
+          Previously, I completed my Ph.D. at <a href="#">University Name</a>, advised by <a href="#">Prof. Advisor Name</a>. My dissertation explored [brief description]. Before that, I received my B.S. from <a href="#">Undergraduate University</a> in [year].
+        </p>
+        <p>
+          I'm passionate about [a few interests]. Feel free to reach out if you'd like to collaborate or chat about research.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── NEWS ── -->
+  <section id="news">
+    <div class="section-header">
+      <h2 class="section-title">News</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="news-list">
+      <div class="news-item">
+        <span class="news-date">2025.03</span>
+        <span class="news-text"><strong>🎉 Paper accepted</strong> — Our paper on [topic] was accepted to [Venue / Journal Name].</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2025.01</span>
+        <span class="news-text"><strong>🏆 Award</strong> — Received the [Award Name] at [Conference / Institution].</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2024.09</span>
+        <span class="news-text">Started a new role as [Job Title] at <strong>[Company Name]</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2024.06</span>
+        <span class="news-text">Gave a talk at [Conference Name] in [City] on [topic].</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2024.05</span>
+        <span class="news-text"><strong>🎓 Graduated</strong> — Successfully defended my Ph.D. thesis at [University].</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE ── -->
+  <section id="experience">
+    <div class="section-header">
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2024 — Present</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Software / Research Engineer</div>
+          <div class="timeline-org">Company Name · San Francisco, CA</div>
+          <div class="timeline-desc">Short description of what you do here. Focus on impact and technologies used. Keep it to 2–3 sentences max for scannability.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2022 — 2024</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Research Intern</div>
+          <div class="timeline-org">Research Lab / Company · Remote</div>
+          <div class="timeline-desc">Description of internship work. What did you build, discover, or contribute? Mention team size or collaborators if relevant.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Summer 2021</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Engineering Intern</div>
+          <div class="timeline-org">Another Company · New York, NY</div>
+          <div class="timeline-desc">What you worked on during this internship. Technologies, outcomes, scale.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PUBLICATIONS ── -->
+  <section id="publications">
+    <div class="section-header">
+      <h2 class="section-title">Publications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-title">Title of Your First Paper on an Interesting Research Topic</div>
+        <div class="pub-authors"><strong>Your Name</strong>, Co-author One, Co-author Two, Senior Author</div>
+        <div class="pub-venue">Conference or Journal Name (VENUE), 2025</div>
+        <span class="pub-badge">🏆 Best Paper Award</span>
+      </div>
+      <div class="pub-item">
+        <div class="pub-title">Another Paper Title: Subtitle That Describes the Contribution</div>
+        <div class="pub-authors">Co-author One, <strong>Your Name</strong>, Senior Author</div>
+        <div class="pub-venue">IEEE Transactions on [Field], 2024</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-title">Third Paper Title on a Related but Distinct Topic</div>
+        <div class="pub-authors"><strong>Your Name</strong>, Another Author, Lab PI</div>
+        <div class="pub-venue">International Conference on [Field] (ICXX), 2023</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EDUCATION ── -->
+  <section id="education">
+    <div class="section-header">
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2020 — 2024</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Ph.D. in [Your Field]</div>
+          <div class="timeline-org">University Name · City, State</div>
+          <div class="timeline-desc">Advisor: Prof. Advisor Name. Dissertation: "Thesis Title Here." GPA: X.X / 4.0.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2016 — 2020</div>
+        <div class="timeline-body">
+          <div class="timeline-role">B.S. in [Your Major]</div>
+          <div class="timeline-org">Undergraduate University · City, State</div>
+          <div class="timeline-desc">Minor in [Minor]. Graduated with honors. Senior thesis: "[Thesis Title]."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills">
+    <div class="section-header">
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">MATLAB</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">ROS</span>
+          <span class="skill-tag">React</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">AWS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Research</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">Control Theory</span>
+          <span class="skill-tag">Robotics</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── CONTACT ── -->
+<div class="page-wrap">
+  <section id="contact">
+    <div class="contact-inner">
+      <h2>Get in touch</h2>
+      <p>I'm always open to new collaborations, research conversations, or just a friendly chat. Drop me a line.</p>
+      <div class="contact-links">
+        <a class="contact-link-btn" href="mailto:you@email.com">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          Email Me
+        </a>
+        <a class="contact-link-btn" href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 0 1 4 0v4m0-4v4"/></svg>
+          LinkedIn
+        </a>
+        <a class="contact-link-btn" href="cv.pdf" target="_blank">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 17V3M12 17l-4-4M12 17l4-4"/><path d="M20 21H4"/></svg>
+          CV / Resume
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>© 2025 Your Name</p>
+  <p>Built with HTML & CSS</p>
+</footer>
+
+</body>
+</html>

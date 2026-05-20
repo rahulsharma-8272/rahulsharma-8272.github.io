@@ -28,7 +28,7 @@
     #about { padding: 1rem 0rem; display: grid; grid-template-columns: 240px 1fr; gap: 4rem; align-items: start; border-top: none; }
     .profile-card { position: sticky; top: calc(var(--nav-h) + 2rem); }
     .avatar { width: 160px; height: 160px; border-radius: 50%; background: linear-gradient(135deg, #D6E4F0, #C4D8EB); border: 3px solid var(--border); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .avatar img { width: 100%; height: 100%; object-fit: contain; }
     .avatar-initials { font-family: var(--serif); font-size: 42px; font-weight: 300; color: var(--accent); }
     .profile-name { font-family: var(--serif); font-size: 28px; font-weight: 500; line-height: 1.2; margin-bottom: 0.25rem; }
     .profile-title { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
@@ -145,7 +145,7 @@
     </div>
 
     <div class="content-col">
-      <h1 class="greeting"> <em>Welcome to my world!</em></h1>
+      <h1 class="greeting"<em>Welcome to my world!</em></h1>
       <div class="bio">
         <p>I am an AI engineer at <a href="https://vinci4d.ai" target="_blank"><strong>vinci4d.ai</strong> </a> and a Ph.D graduate in Mechanical & Aerospace Engineering from <a href="https://www.rutgers.edu" target="_blank">Rutgers University</a>, advised by <strong>Prof. Y.B. Guo</strong>. My research lies at the intersection of physics-informed machine learning (PINN) and metal additive manufacturing &mdash; building deep learning frameworks grounded in governing physical laws to predict thermal fields, melt pool dynamics, stress evolution, and fatigue failure in laser powder bed fusion processes.</p>
         <p>I also serve as an ML intern at Intelligent Twins, developing State-of-the-Art ML models and physics-informed solvers for different clients. 
